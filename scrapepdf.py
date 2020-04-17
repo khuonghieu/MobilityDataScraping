@@ -2,22 +2,23 @@ import requests
 from bs4 import BeautifulSoup as bs
 import urllib.request, urllib.error, urllib.parse
 
-_URL = 'https://www.google.com/covid19/mobility/' 
+URL = 'https://www.google.com/covid19/mobility/' 
 
 # functional
-r = requests.get(_URL)
+r = requests.get(URL)
 soup = bs(r.text, "lxml")
 urls = []
 names = []
 for i, link in enumerate(soup.findAll('a')):
-    _FULLURL = link.get('href')
+    FULLURL = link.get('href')
 
-    if _FULLURL.endswith('.pdf'):
-        print(_FULLURL)
+    if FULLURL.endswith('.pdf'):
+        print(FULLURL)
         soupPDFLink = soup.select('a')[i].attrs['href']
 
-        urls.append(_FULLURL)
+        urls.append(FULLURL)
         names.append(soupPDFLink.rsplit("/", 1)[-1])
+print(len(urls))
 
 names_urls = list(zip(names, urls))
 
