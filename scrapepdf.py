@@ -9,7 +9,7 @@ r = requests.get(URL)
 soup = bs(r.text, "lxml")
 urls = []
 names = []
-for i, link in enumerate(soup.findAll('a')):
+for i, link in enumerate(soup.findAll('a',{'class':'glue-button glue-button--low-emphasis glue-button--icon hidden-small'})):
     FULLURL = link.get('href')
 
     if FULLURL.endswith('.pdf'):
@@ -19,6 +19,10 @@ for i, link in enumerate(soup.findAll('a')):
         urls.append(FULLURL)
         names.append(soupPDFLink.rsplit("/", 1)[-1])
 print(len(urls))
+
+
+
+
 
 names_urls = list(zip(names, urls))
 
